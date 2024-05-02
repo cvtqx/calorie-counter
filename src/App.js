@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
 import CalorieDisplay from "./components/CalorieDisplay";
 import InputForm from "./components/InputForm";
 import TotalCalories from "./components/TotalCalories";
+import Confetti from "react-confetti";
 
 function App() {
 
@@ -12,9 +13,12 @@ function App() {
   const [calories, setCalories] = useState("");
   const [food, setFood] = useState("")
   const [totalCalories, setTotalCalories] = useState(0);
+  const [showConfetti, setShowConfetti] = useState(false)
 
   const apiKey = process.env.REACT_APP_API_KEY;
   const apiId = process.env.REACT_APP_API_ID;
+
+  // let audio = new Audio('../public/sounds/happy-sound-effect-141434.mp3')
 
   const inputChangeHandler = (e) => {
     setInput(e.target.value);
@@ -32,6 +36,10 @@ function App() {
   const calculateTotal = () => {
     const total = totalCalories + calories;
     setTotalCalories(total);
+    if (total >= 500) {
+      console.log('well done!')
+      setShowConfetti(true)
+    };
     setIsClicked(false);
   }
 
@@ -46,8 +54,15 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    showConfetti && setTimeout(() => {
+  setShowConfetti(false)
+}, 10000)
+  }, [showConfetti])
+
   return (
     <div className="app-container">
+      {showConfetti && <Confetti />}
       <h1>Calorie-Meter</h1>
       <InputForm
         setIsClicked={setIsClicked}
