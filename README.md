@@ -1,7 +1,9 @@
-## Why I created this project
-These days I am into growing muscle. (And if you saw me you would never believe that). Exercise alone does not help if you are not eating enough, so I created this simple calorie calculating tool which will help me to understand how much (more) I need to eat. 
+## About this project:
 
-I am using this project for practice and will be adding features as they come along.
+A simple tool to calculate daily calorie intake. 
+
+## To Do: 
+  Add input fields for portion sizes, amount eaten etc... and calculate total based on these inputs.
 
 ## API
 
