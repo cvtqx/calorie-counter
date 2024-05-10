@@ -5,11 +5,11 @@ A simple tool to calculate daily calorie intake.
 ## To Do: 
   - Add input fields for portion sizes, amount eaten etc... and calculate total based on these inputs.
   - Improve design of the input form
-  - Redux
-  - Add sound on reaching milestone alongside confetti
+  - Add confetti and sound on reaching milestone
   - add unit tests
-  - add validation to input fields
   - add error handling
+  - style and add functioanlity to new component to display items in menu
+
 
 ## API
 

@@ -7,6 +7,7 @@ import CalorieDisplay from "./components/CalorieDisplay";
 import InputForm from "./components/InputForm";
 import TotalCalories from "./components/TotalCalories";
 import Confetti from "react-confetti";
+import DailyMenuDisplay from "./components/DailyMenuDisplay";
 
 function App() {
 
@@ -14,23 +15,19 @@ function App() {
   const [input, setInput] = useState("");
   const [query, setQuery] = useState(null)
   const [calories, setCalories] = useState("");
-  const [totalCalories, setTotalCalories] = useState(0);
   const [showConfetti, setShowConfetti] = useState(false);
   const [error, setError] = useState(false);
+  const [displayMenu, setDisplayMenu] = useState(false);
 
   const apiKey = process.env.REACT_APP_API_KEY;
   const apiId = process.env.REACT_APP_API_ID;
 
-  // const dispatch = useDispatch()
-  //const dailyMenu = useSelector(state => state.dailyMenu)
-
-  //console.log(dailyMenu)
-  // let audio = new Audio('../public/sounds/happy-sound-effect-141434.mp3')
+  const dispatch = useDispatch()
+  const {totalCalories} = useSelector(state => state.dailyMenu)
 
   const inputChangeHandler = (e) => {
     setInput(e.target.value);
   };
-
 
   useEffect(() => {
     const fetchFoodInfo = async () => {
@@ -39,9 +36,8 @@ function App() {
       `https://api.edamam.com/api/nutrition-data?app_id=${apiId}&app_key=${apiKey}&nutrition-type=logging&ingr=${query}`,
       );
       if (response && response.data) {
-        console.log(response.data.ingredients[0].text);
-        setCalories(response.data.calories);
-      } else {
+        setCalories(response.data.calories)
+        } else {
         setError(true)
       }
    
@@ -51,15 +47,13 @@ function App() {
     };
     fetchFoodInfo()
   }, [query])
-  
 
+  
   const calculateTotal = () => {
-    const total = totalCalories + calories;
-    setTotalCalories(total);
-    if (total >= 500) {
-      console.log('showing confetti')
-      setShowConfetti(true)
-    };
+    dispatch(dailyMenuActions.addToMenu({
+      name: query,
+      calories: calories
+    }))
     setIsClicked(false);
   }
 
@@ -85,17 +79,25 @@ function App() {
 }, 10000)
   }, [showConfetti])
 
-  return (
+
+  
+
+  return (  
     <div className="app-container">
       {showConfetti && <Confetti />}
-      <h1>Calorie-Meter</h1>
+      {displayMenu ? (<DailyMenuDisplay />) : (
+        <>
+        <h1>Calorie-Meter</h1>
       <InputForm
         input={input}
         inputChangeHandler={inputChangeHandler}
         buttonClickHandler={buttonClickHandler}
       />
       {isClicked && <CalorieDisplay calories={calories} food={query} calculateTotal={calculateTotal} />}
-      <TotalCalories total={totalCalories} />
+          <TotalCalories total={totalCalories} />
+        </>
+      )}
+      
     </div>
   );
 }
