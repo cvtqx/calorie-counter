@@ -1,25 +1,22 @@
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 html {
   font-family: 'Noto Sans JP', sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100vw;
-  height: fit-content;
-  margin-top: 25px;
-
 }
 
+
+html, body{
+  height: 100%;
+}
 body {
-  margin: 25px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: 100vw;
-  height: 100vh;
+  justify-content: center; 
   background-image: url('../images/background.jpg');
   background-size: cover;
   background-attachment: fixed;

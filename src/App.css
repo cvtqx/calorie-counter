@@ -1,12 +1,13 @@
 .app-container{
   display: flex;
   flex-direction: column;
+  text-align: center;
   background-color: antiquewhite;
-  width: 50vw;
+  width: 70%;
   height: fit-content;
   align-items: center;
   justify-content: center; 
   border-radius: 5px;
   min-width: fit-content;
-  padding: 2em;
+  padding: 1em;
 }

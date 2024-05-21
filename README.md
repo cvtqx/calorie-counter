@@ -6,6 +6,7 @@ A simple tool to calculate daily calorie intake.
   - Add input fields for portion sizes, amount eaten etc... and calculate total based on these inputs.
   - Improve design of the input form
   - Add confetti and sound on reaching milestone
+  - refine search query to search for multiple word input
   - add unit tests
   - add error handling
   - style and add functioanlity to new component to display items in menu

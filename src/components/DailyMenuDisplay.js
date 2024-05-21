@@ -8,7 +8,7 @@ const DailyMenuDisplay = () => {
     const menuItems = useSelector(state => state.dailyMenu);
     console.log(menuItems);
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     const handleDelete = (item) => {
         dispatch(dailyMenuActions.removeFromMenu(item))
